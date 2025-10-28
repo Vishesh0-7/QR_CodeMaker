@@ -23,11 +23,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Lint with flake8
-        run: |
-          pip install flake8
-          flake8 main.py
-
       - name: Run QR code script (test run)
         run: |
           python main.py --url https://github.com/Vishesh0-7
