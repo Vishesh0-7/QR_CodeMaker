@@ -1,0 +1,38 @@
+name: QR CodeMaker CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Lint with flake8
+        run: |
+          pip install flake8
+          flake8 main.py
+
+      - name: Run QR code script (test run)
+        run: |
+          python main.py --url https://github.com/Vishesh0-7
+
+      # Add test steps here if you have test files
+      # - name: Run tests
+      #   run: |
+      #     pytest
